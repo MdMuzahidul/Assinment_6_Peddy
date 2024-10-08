@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="cupcake">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pet Shop</title>
+    <!-- daisy UI CDN -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@4.12.12/dist/full.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- font awasome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- google font CDN -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- custom tailwind  -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              clifford: "#da373d",
+              btnBg: "rgba(14,122,129,1)",
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="bg-white">
+    <!-- header section  -->
+    <header class="w-11/12 mx-auto">
+      <!-- nav section  -->
+      <nav class="flex justify-between py-14 items-center">
+        <!-- nav section  -->
+        <div class="flex gap-2 items-center">
+          <div>
+            <img src="images/logo.webp" alt="" />
+          </div>
+          <h3 class="text-3xl font-black">Peddy</h3>
+        </div>
+        <div>
+          <ul class="flex gap-7 capitalize">
+            <li>home</li>
+            <li>shop</li>
+            <li>contact</li>
+          </ul>
+        </div>
+        <div
+          class="border h-11 w-11 flex justify-center items-center rounded-full"
+        >
+          <i class="fa-regular fa-user"></i>
+        </div>
+      </nav>
+      <!-- bannar section  -->
+      <section>
+        <div class="text-center mb-12">
+          <h3 class="text-2xl font-bold capitalize mb-6">
+            bringing families together
+          </h3>
+          <h2 class="text-7xl font-black mb-6">
+            Your Path to Adoption <br />
+            Starts Here
+          </h2>
+          <p class="mb-8 max-w-3xl mx-auto">
+            It is a long established fact that a reader will be distracted by
+            the readable content of a page when looking at its layout. The point
+            of using Lorem Ipsum is that it has a.
+          </p>
+          <button
+            class="btn rounded-xl text-xl font-bold capitalize text-white bg-btnBg hover:bg-btnBg"
+          >
+            view more
+          </button>
+        </div>
+        <div class="flex justify-center mb-24">
+          <img src="images/pet.webp" alt="" />
+        </div>
+      </section>
+    </header>
+    <!-- main section  -->
+    <main class="w-11/12 mx-auto">
+      <section class="text-center">
+        <h3 class="font-black text-4xl mb-6">Adopt Your Best Friend</h3>
+        <p class="max-w-screen-sm mx-auto">
+          It is a long established fact that a reader will be distracted by the
+          readable content of a page when looking at its layout. The point of
+          using Lorem Ipsum is that it has a.
+        </p>
+      </section>
+    </main>
+    <!-- footer section  -->
+    <footer></footer>
+  </body>
+</html>
