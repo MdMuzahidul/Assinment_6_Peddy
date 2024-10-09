@@ -7,6 +7,6 @@ loadData();
 function display(animals) {
   //   const petDosplay = document.getElementById("pets-display");
   for (const animal in animals) {
-    console.log(animal.);
+    console.log(animal);
   }
 }
