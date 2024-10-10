@@ -106,19 +106,8 @@
         </p>
       </section>
       <!-- btn section  -->
-      <section class="grid grid-cols-2 md:grid-cols-4 gap-6">
-        <button class="btn rounded-lg font-bold text-2xl capitalize">
-          cats
-        </button>
-        <button class="btn rounded-lg font-bold text-2xl capitalize">
-          rabbits
-        </button>
-        <button class="btn rounded-lg font-bold text-2xl capitalize">
-          birds
-        </button>
-        <button class="btn rounded-lg font-bold text-2xl capitalize">
-          dogs
-        </button>
+      <section id="catagory-btn" class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <!-- catagories btn -->
       </section>
       <!-- sort btn section  -->
       <section
@@ -159,6 +148,69 @@
             </div>
           </div>
         </div>
+      </section>
+      <!-- model section  -->
+      <section>
+        <!-- You can open the modal using ID.showModal() method -->
+        <button class="btn" onclick="my_modal_4.showModal()">open modal</button>
+        <dialog id="my_modal_4" class="modal">
+          <div class="modal-box w-11/12 max-w-2xl">
+            <div>
+              <img
+                src="images/download.jpeg"
+                alt=""
+                class="w-full rounded-lg"
+              />
+            </div>
+            <div class="space-y-1">
+              <h3 class="text-xl font-bold pt-6">${animal.pet_name}</h3>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+                <div>
+                  <i class="fa-solid fa-table-cells-large"></i>
+                  Breed:${animal.breed}
+                </div>
+                <div>
+                  <i class="fa-regular fa-calendar"></i>
+                  Birth:${animal.date_of_birth}
+                </div>
+                <div>
+                  <i class="fa-solid fa-venus"></i>
+                  Gender:${animal.gender}
+                </div>
+                <div>
+                  <i class="fa-solid fa-dollar-sign"></i>
+                  price:${animal.price}$
+                </div>
+                <div>
+                  <i class="fa-solid fa-venus"></i>
+                  Vaccination status:${animal.vaccinated_status}$
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="my-4">
+                <hr />
+              </div>
+              <div>
+                <h3 class="font-semibold mb-3">Detials Information</h3>
+                <p class="mb-4">
+                  "This affectionate female Siamese cat is known for her vocal
+                  nature and love for attention. Born on September 5, 2022, she
+                  enjoys interactive play and snuggles. Fully vaccinated and
+                  priced at $800, she's the perfect fit for cat lovers who
+                  appreciate an intelligent, engaging, and sociable feline
+                  companion.",
+                </p>
+              </div>
+            </div>
+            <div class="modal-action">
+              <form method="dialog">
+                <!-- if there is a button, it will close the modal -->
+                <button class="btn">Close</button>
+              </form>
+            </div>
+          </div>
+        </dialog>
       </section>
     </main>
     <!-- footer section  -->

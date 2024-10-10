@@ -1,13 +1,51 @@
+const loadbtn = async () => {
+  const res = await fetch(
+    `https://openapi.programming-hero.com/api/peddy/categories`
+  );
+  const data = await res.json();
+  const animals = data.categories;
+  displaybtn(animals);
+};
+
+loadbtn();
+
+function displaybtn(catagory) {
+  const allbtn = document.getElementById("catagory-btn");
+  for (const btn of catagory) {
+    const button = document.createElement("button");
+    button.classList.add(
+      "border-2",
+      "flex",
+      "justify-center",
+      "items-center",
+      "gap-4",
+      "h-28",
+      "rounded-lg",
+      "font-bold",
+      "text-2xl",
+      "capitalize"
+    );
+
+    button.innerHTML = `
+     <img src="${btn.category_icon}" alt="" />
+          ${btn.category}
+    `;
+    allbtn.appendChild(button);
+  }
+}
+
 const loadData = async () => {
   const res = await fetch(
     `https://openapi.programming-hero.com/api/peddy/pets`
   );
   const data = await res.json();
   const animals = data.pets;
-  dispaly(animals);
+  display(animals);
 };
+
 loadData();
-function dispaly(animals) {
+
+function display(animals) {
   const pet = document.getElementById("pets-display");
   // console.log(pet);
   for (const animal of animals) {
