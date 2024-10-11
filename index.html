@@ -35,6 +35,7 @@
             colors: {
               clifford: "#da373d",
               btnBg: "rgba(14,122,129,1)",
+              petBg: "rgba(19,19,19,0.03)",
             },
           },
         },
@@ -124,6 +125,23 @@
       <section class="mb-16">
         <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
           <div class="md:col-span-2 lg:col-span-3">
+            <!-- no information section start  -->
+            <div id="null-section" class="hidden">
+              <div
+                class="flex flex-col justify-center items-center bg-petBg rounded-2xl py-24"
+              >
+                <div class="mb-6"><img src="images/error.webp" alt="" /></div>
+                <h2 class="text-3xl font-bold capitalize">
+                  no information available
+                </h2>
+                <p class="max-w-3xl text-center mt-4">
+                  It is a long established fact that a reader will be distracted
+                  by the readable content of a page when looking at its layout.
+                  The point of using Lorem Ipsum is that it has a.
+                </p>
+              </div>
+            </div>
+            <!-- no information section end  -->
             <div id="pets-display" class="grid md:grid-cols-12 gap-6">
               <!-- display all pets  -->
             </div>
@@ -150,10 +168,9 @@
         </div>
       </section>
       <!-- model section  -->
-      <section>
+      <section id="modal">
         <!-- You can open the modal using ID.showModal() method -->
-        <button class="btn" onclick="my_modal_4.showModal()">open modal</button>
-        <dialog id="my_modal_4" class="modal">
+       <!-- <dialog id="my_modal_4" class="modal">
           <div class="modal-box w-11/12 max-w-2xl">
             <div>
               <img
@@ -204,13 +221,12 @@
               </div>
             </div>
             <div class="modal-action">
-              <form method="dialog">
-                <!-- if there is a button, it will close the modal -->
-                <button class="btn">Close</button>
+              <form method="dialog" class="w-full">
+                <button class="btn w-full">Close</button>
               </form>
             </div>
           </div>
-        </dialog>
+        </dialog> -->
       </section>
     </main>
     <!-- footer section  -->
@@ -270,7 +286,6 @@
         </div>
       </section>
     </footer>
-
     <script src="./script/app.js"></script>
   </body>
 </html>
