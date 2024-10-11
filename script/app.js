@@ -6,6 +6,7 @@ const loadData = async () => {
   const animals = data.pets;
   display(animals);
 };
+
 const loadCatagory = async (id) => {
   // console.log(id);
   const res = await fetch(
@@ -15,6 +16,7 @@ const loadCatagory = async (id) => {
   const animals = pet.data;
   display(animals);
 };
+
 const loadbtn = async () => {
   const res = await fetch(
     `https://openapi.programming-hero.com/api/peddy/categories`
@@ -113,6 +115,30 @@ const displaybtn = (data) => {
   }
 };
 
+const displayImage = async (id) => {
+  const res = await fetch(
+    `https://openapi.programming-hero.com/api/peddy/pet/${id}`
+  );
+  const data = await res.json();
+  const animals = data.petData;
+  const imageContainer = document.getElementById("image-container");
+  const div = document.createElement("div");
+  div.innerHTML = `
+    <img src="${animals.image}" alt="" class="rounded-md" />
+  `;
+  imageContainer.appendChild(div);
+};
+
+const changeText = (petId) => {
+  const button = document.querySelector(
+    `button[onclick="changeText('${petId}')"]`
+  );
+  if (button) {
+    button.innerText = "Adopted";
+    button.disabled = true;
+  }
+};
+
 const display = (animals) => {
   const pet = document.getElementById("pets-display");
   const nullSection = document.getElementById("null-section");
@@ -164,23 +190,21 @@ const display = (animals) => {
                     <hr />
                   </div>
                   <div class="flex justify-between gap-2 flex-wrap">
-                    <button class="btn rounded-md bg-white text-xl">
+                    <button onclick="displayImage('${animal.petId}')" class="btn rounded-md bg-white text-xl">
                       <i class="fa-regular fa-thumbs-up"></i>
                     </button>
-                    <button class="btn rounded-md bg-white text-xl font-bold">
+                    <button onclick="changeText('${animal.petId}')" class="btn rounded-md bg-white text-xl font-bold">
                       Adopt
                     </button>
                     <button  onclick="displayModal('${animal.petId}')" class="btn rounded-md bg-white text-xl font-bold">
                       Details
                     </button>
                   </div>
-                </div>
-                
+                </div>   
     `;
       pet.appendChild(div);
     }
   }
 };
-
 loadData();
 loadbtn();
