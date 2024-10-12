@@ -1,7 +1,5 @@
 # b10a6-pet-adoption-MdMuzahidul
 
-# b10a6-pet-adoption-MdMuzahidul
-
 ## Project Overview
 
 This project is a pet adoption website designed to bring families and pets together. It provides a platform for users to find pets available for adoption and learn more about the adoption process.
@@ -26,19 +24,13 @@ This project is a pet adoption website designed to bring families and pets toget
 
 ## Usage
 
-1. Clone the repository to your local machine.
-2. Open `index.html` in your web browser to view the website.
+1. Clone the repository to my local machine.
+2. Open `index.html` in my web browser to view the website.
 3. Modify the files as needed to customize the website.
 
 ## Dependencies
 
 - **Tailwind CSS**: Used for styling the website.
 - **JavaScript**: Used for interactive elements.
+- **daisy UI**: use for creat modal .
 
-## Contributing
-
-Feel free to fork this repository and make changes. Pull requests are welcome.
-
-## License
-
-This project is licensed under the MIT License.
