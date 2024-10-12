@@ -1,29 +1,33 @@
-const loadData = async () => {
-  const res = await fetch(
-    `https://openapi.programming-hero.com/api/peddy/pets`
-  );
-  const data = await res.json();
-  const animals = data.pets;
-  display(animals);
+const loadData = () => {
+  fetch(`https://openapi.programming-hero.com/api/peddy/pets`)
+    .then((res) => res.json())
+    .then((animals) => display(animals.pets));
 };
 
-const loadCatagory = async (id) => {
-  // console.log(id);
-  const res = await fetch(
-    `https://openapi.programming-hero.com/api/peddy/category/${id}`
-  );
-  const pet = await res.json();
-  const animals = pet.data;
-  display(animals);
+const loadCatagory = (id) => {
+  fetch(`https://openapi.programming-hero.com/api/peddy/category/${id}`)
+    .then((res) => res.json())
+    .then((animals) => {
+      allButton();
+      const selectButton = document.getElementById(`btn-${id}`);
+      selectButton.classList.remove("rounded-lg", "bg-white", "hover:bg-white");
+      selectButton.classList.add("active");
+      // console.log(`btn-${id}`);
+      display(animals.data);
+    });
+};
+const allButton = () => {
+  const allButton = document.getElementsByClassName("btn-class-list");
+  for (let btn of allButton) {
+    btn.classList.remove("active");
+    btn.classList.add("rounded-lg", "bg-white", "hover:bg-white");
+  }
 };
 
-const loadbtn = async () => {
-  const res = await fetch(
-    `https://openapi.programming-hero.com/api/peddy/categories`
-  );
-  const data = await res.json();
-  const animals = data.categories;
-  displaybtn(animals);
+const loadbtn = () => {
+  fetch(`https://openapi.programming-hero.com/api/peddy/categories`)
+    .then((res) => res.json())
+    .then((animals) => displaybtn(animals.categories));
 };
 
 const displayModal = async (id) => {
@@ -33,10 +37,7 @@ const displayModal = async (id) => {
   const data = await res.json();
   const animals = data.petData;
   const modalContainer = document.getElementById("modal");
-
-  // Clear existing content
   modalContainer.innerHTML = "";
-
   const div = document.createElement("div");
   div.innerHTML = `
   <dialog id="my_modal_4" class="modal">
@@ -65,11 +66,11 @@ const displayModal = async (id) => {
                 </div>
                 <div>
                   <i class="fa-solid fa-dollar-sign"></i>
-                  price:${animals.price}$
+                  price: ${animals.price}$
                 </div>
                 <div>
                   <i class="fa-solid fa-venus"></i>
-                  Vaccination status:${animals.vaccinated_status}
+                  Vaccination status: ${animals.vaccinated_status}
                 </div>
               </div>
             </div>
@@ -88,13 +89,9 @@ const displayModal = async (id) => {
           </div>
         </dialog>
   `;
-
   modalContainer.appendChild(div);
-
   const modal = document.getElementById("my_modal_4");
   modal.showModal();
-
-  // Add event listener to close the modal
   const closeModalButton = document.getElementById("close_modal");
   closeModalButton.addEventListener("click", () => {
     modal.close();
@@ -106,7 +103,7 @@ const displaybtn = (data) => {
   for (const btn of data) {
     const buttonContainer = document.createElement("div");
     buttonContainer.innerHTML = `
-    <button onclick="loadCatagory('${btn.category}')" class=" border-2 w-full flex justify-center items-center gap-4 h-28 rounded-lg font-bold text-2xl capitalize btn">
+    <button id="btn-${btn.category}" onclick="loadCatagory('${btn.category}')" class="bg-white hover:bg-white border-2 w-full flex justify-center items-center gap-4 h-28 rounded-lg font-bold text-2xl capitalize btn btn-class-list">
      <img src="${btn.category_icon}" alt="" />
           ${btn.category}
     </button>      
@@ -140,71 +137,79 @@ const changeText = (petId) => {
 };
 
 const display = (animals) => {
-  const pet = document.getElementById("pets-display");
-  const nullSection = document.getElementById("null-section");
-  if (animals.length === 0) {
-    nullSection.classList.remove("hidden");
-    pet.classList.add("hidden");
-  } else {
-    nullSection.classList.add("hidden");
-    pet.classList.remove("hidden");
-    pet.innerText = "";
-    for (const animal of animals) {
-      const div = document.createElement("div");
-      div.classList.add(
-        "border-2",
-        "p-6",
-        "rounded-xl",
-        "md:col-span-6",
-        "lg:col-span-4"
-      );
-      div.innerHTML = `
-                <div>
-                  <img
-                    src="${animal.image}"
-                    alt=""
-                    class="w-full rounded-lg"
-                  />
-                </div>
-                <div class="space-y-1">
-                  <h3 class="text-xl font-bold pt-6">${animal.pet_name}</h3>
+  const loader = document.getElementById("loading-screen");
+  const displayAllPets = document.getElementById("display1");
+  loader.classList.remove("hidden");
+  displayAllPets.classList.add("hidden");
+  setTimeout(() => {
+    loader.classList.add("hidden");
+    displayAllPets.classList.remove("hidden");
+    const pet = document.getElementById("pets-display");
+    const nullSection = document.getElementById("null-section");
+    if (animals.length === 0) {
+      nullSection.classList.remove("hidden");
+      pet.classList.add("hidden");
+    } else {
+      nullSection.classList.add("hidden");
+      pet.classList.remove("hidden");
+      pet.innerText = "";
+      for (const animal of animals) {
+        const div = document.createElement("div");
+        div.classList.add(
+          "border-2",
+          "p-6",
+          "rounded-xl",
+          "md:col-span-6",
+          "lg:col-span-4"
+        );
+        div.innerHTML = `
                   <div>
-                    <i class="fa-solid fa-table-cells-large"></i>
-                    Breed:${animal.breed}
+                    <img
+                      src="${animal.image}"
+                      alt=""
+                      class="w-full rounded-lg"
+                    />
+                  </div>
+                  <div class="space-y-1">
+                    <h3 class="text-xl font-bold pt-6">${animal.pet_name}</h3>
+                    <div>
+                      <i class="fa-solid fa-table-cells-large"></i>
+                      Breed:${animal.breed}
+                    </div>
+                    <div>
+                      <i class="fa-regular fa-calendar"></i>
+                      Birth:${animal.date_of_birth}
+                    </div>
+                    <div>
+                      <i class="fa-solid fa-venus"></i>
+                      Gender:${animal.gender}
+                    </div>
+                    <div>
+                      <i class="fa-solid fa-dollar-sign"></i>
+                      price:${animal.price}$
+                    </div>
                   </div>
                   <div>
-                    <i class="fa-regular fa-calendar"></i>
-                    Birth:${animal.date_of_birth}
-                  </div>
-                  <div>
-                    <i class="fa-solid fa-venus"></i>
-                    Gender:${animal.gender}
-                  </div>
-                  <div>
-                    <i class="fa-solid fa-dollar-sign"></i>
-                    price:${animal.price}$
-                  </div>
-                </div>
-                <div>
-                  <div class="my-4">
-                    <hr />
-                  </div>
-                  <div class="flex justify-between gap-2 flex-wrap">
-                    <button onclick="displayImage('${animal.petId}')" class="btn rounded-md bg-white text-xl">
-                      <i class="fa-regular fa-thumbs-up"></i>
-                    </button>
-                    <button onclick="changeText('${animal.petId}')" class="btn rounded-md bg-white text-xl font-bold">
-                      Adopt
-                    </button>
-                    <button  onclick="displayModal('${animal.petId}')" class="btn rounded-md bg-white text-xl font-bold">
-                      Details
-                    </button>
-                  </div>
-                </div>   
-    `;
-      pet.appendChild(div);
+                    <div class="my-4">
+                      <hr />
+                    </div>
+                    <div class="flex justify-between gap-2 flex-wrap">
+                      <button onclick="displayImage('${animal.petId}')" class="btn rounded-md bg-white text-xl">
+                        <i class="fa-regular fa-thumbs-up"></i>
+                      </button>
+                      <button onclick="changeText('${animal.petId}')" class="btn rounded-md bg-white text-xl font-bold">
+                        Adopt
+                      </button>
+                      <button  onclick="displayModal('${animal.petId}')" class="btn rounded-md bg-white text-xl font-bold">
+                        Details
+                      </button>
+                    </div>
+                  </div>   
+      `;
+        pet.appendChild(div);
+      }
     }
-  }
+  }, 2000);
 };
 loadData();
 loadbtn();

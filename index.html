@@ -41,6 +41,14 @@
         },
       };
     </script>
+    <style>
+      .active {
+        background-color: rgba(14, 122, 129, 0.1);
+        color: black;
+        border-radius: 120px;
+        border: 1px solid rgba(14, 122, 129, 1);
+      }
+    </style>
   </head>
   <body class="bg-white">
     <!-- header section  -->
@@ -121,8 +129,18 @@
           sort by price
         </button>
       </section>
+      <!-- loding screen -->
+      <section
+        id="loading-screen"
+        class="w-full flex justify-center space-x-11 pb-16"
+      >
+        <span class="loading loading-bars loading-xs"></span>
+        <span class="loading loading-bars loading-sm"></span>
+        <span class="loading loading-bars loading-md"></span>
+        <span class="loading loading-bars loading-lg"></span>
+      </section>
       <!-- display pets secstion -->
-      <section class="mb-16">
+      <section id="display1" class="mb-16">
         <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
           <div class="md:col-span-2 lg:col-span-3">
             <!-- no information section start  -->
@@ -154,8 +172,7 @@
         </div>
       </section>
       <!-- model section  -->
-      <section id="modal">
-      </section>
+      <section id="modal"></section>
     </main>
     <!-- footer section  -->
     <footer class="text-white bg-black py-10 md:py-24">
