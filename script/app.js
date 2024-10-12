@@ -126,15 +126,62 @@ const displayImage = async (id) => {
   imageContainer.appendChild(div);
 };
 
-const changeText = (petId) => {
-  const button = document.querySelector(
-    `button[onclick="changeText('${petId}')"]`
+const changeText = async (id) => {
+  const res = await fetch(
+    `https://openapi.programming-hero.com/api/peddy/pet/${id}`
   );
-  if (button) {
+  const data = await res.json();
+  const animals = data.petData;
+  const modalContainer = document.getElementById("modal");
+  modalContainer.innerHTML = "";
+  const div = document.createElement("div");
+  div.innerHTML = `
+  <dialog id="my_modal_4" class="modal">
+          <div class="modal-box w-11/12 max-w-2xl">
+           <h2 class="text-5xl text-center capitalize mb-5"> congratulations </h2>
+           <h3 class="text-center text-xl capitalize"> you have successfully adopted ${animals.pet_name} </h3>
+           <p class="text-center  text-4xl my-5"><span id="countdown">3</span></p>
+            <button id="close_modal" class="hidden">Close</button>
+          </div>
+        </dialog>
+  `;
+  modalContainer.appendChild(div);
+  const modal = document.getElementById("my_modal_4");
+  modal.showModal();
+  let countTimer = 3;
+  const countTimerElement = document.getElementById("countdown");
+  const interval = setInterval(() => {
+    countTimer -= 1;
+    countTimerElement.innerText = countTimer;
+    if (countTimer === 0) {
+      clearInterval(interval);
+      modal.close();
+    }
+  }, 1000);
+  const closeModalButton = document.getElementById("close_modal");
+  closeModalButton.addEventListener("click", () => {
+    modal.close();
+  });
+  setTimeout(() => {
+    const button = document.getElementById(`btn-${id}`);
     button.innerText = "Adopted";
     button.disabled = true;
-  }
+  }, 3000);
 };
+
+const sortByPrice = (animal) => {
+  return animal.sort((a, b) => parseInt(a.price) - parseInt(b.price));
+};
+
+document.getElementById("sort-btn").addEventListener("click", async () => {
+  const response = await fetch(
+    `https://openapi.programming-hero.com/api/peddy/pets`
+  );
+  const data = await response.json();
+  const animals = data.pets;
+  const sortedAnimals = sortByPrice([...animals]);
+  display(sortedAnimals);
+});
 
 const display = (animals) => {
   const loader = document.getElementById("loading-screen");
@@ -150,6 +197,7 @@ const display = (animals) => {
       nullSection.classList.remove("hidden");
       pet.classList.add("hidden");
     } else {
+      // const sortedAnimals = sortByPrice([...animals]);
       nullSection.classList.add("hidden");
       pet.classList.remove("hidden");
       pet.innerText = "";
@@ -174,19 +222,19 @@ const display = (animals) => {
                     <h3 class="text-xl font-bold pt-6">${animal.pet_name}</h3>
                     <div>
                       <i class="fa-solid fa-table-cells-large"></i>
-                      Breed:${animal.breed}
+                      Breed: ${animal.breed}
                     </div>
                     <div>
                       <i class="fa-regular fa-calendar"></i>
-                      Birth:${animal.date_of_birth}
+                      Birth: ${animal.date_of_birth}
                     </div>
                     <div>
                       <i class="fa-solid fa-venus"></i>
-                      Gender:${animal.gender}
+                      Gender: ${animal.gender}
                     </div>
                     <div>
                       <i class="fa-solid fa-dollar-sign"></i>
-                      price:${animal.price}$
+                      price: ${animal.price}$
                     </div>
                   </div>
                   <div>
@@ -197,7 +245,7 @@ const display = (animals) => {
                       <button onclick="displayImage('${animal.petId}')" class="btn rounded-md bg-white text-xl">
                         <i class="fa-regular fa-thumbs-up"></i>
                       </button>
-                      <button onclick="changeText('${animal.petId}')" class="btn rounded-md bg-white text-xl font-bold">
+                      <button id="btn-${animal.petId}"  onclick="changeText('${animal.petId}')" class="btn rounded-md bg-white text-xl font-bold">
                         Adopt
                       </button>
                       <button  onclick="displayModal('${animal.petId}')" class="btn rounded-md bg-white text-xl font-bold">
