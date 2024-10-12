@@ -138,7 +138,7 @@ const changeText = async (id) => {
   div.innerHTML = `
   <dialog id="my_modal_4" class="modal">
           <div class="modal-box w-11/12 max-w-2xl">
-           <h2 class="text-5xl text-center capitalize mb-5"> congratulations </h2>
+           <h2 class="text-3xl md:text-4xl lg:text-5xl text-center capitalize mb-5"> congratulations </h2>
            <h3 class="text-center text-xl capitalize"> you have successfully adopted ${animals.pet_name} </h3>
            <p class="text-center  text-4xl my-5"><span id="countdown">3</span></p>
             <button id="close_modal" class="hidden">Close</button>
@@ -170,7 +170,7 @@ const changeText = async (id) => {
 };
 
 const sortByPrice = (animal) => {
-  return animal.sort((a, b) => parseInt(a.price) - parseInt(b.price));
+  return animal.sort((a, b) => parseInt(b.price) - parseInt(a.price));
 };
 
 document.getElementById("sort-btn").addEventListener("click", async () => {

@@ -37,6 +37,9 @@
               btnBg: "rgba(14,122,129,1)",
               petBg: "rgba(19,19,19,0.03)",
             },
+            fontFamily: {
+              lato: ["Lato", "sans-serif"],
+            },
           },
         },
       };
@@ -45,12 +48,22 @@
       .active {
         background-color: rgba(14, 122, 129, 0.1);
         color: black;
-        border-radius: 120px;
+        border-radius: 20px;
         border: 1px solid rgba(14, 122, 129, 1);
+      }
+      @media screen and (min-width: 768px) {
+        .active {
+          border-radius: 30px;
+        }
+      }
+      @media screen and (min-width: 1024px) {
+        .active {
+          border-radius: 120px;
+        }
       }
     </style>
   </head>
-  <body class="bg-white">
+  <body class="bg-white font-lato">
     <!-- header section  -->
     <header class="w-11/12 mx-auto">
       <!-- nav section  -->
